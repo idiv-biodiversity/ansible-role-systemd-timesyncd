@@ -12,13 +12,13 @@
 # See timesyncd.conf(5) for details.
 
 [Time]
-{% if systemd_timesyncd_ntp is defined %}
-NTP={{ systemd_timesyncd_ntp | join(" ") }}
+{% if ntp_servers is defined %}
+NTP={{ ntp_servers | join(" ") }}
 {% else %}
 #NTP=
 {% endif %}
-{% if systemd_timesyncd_fallback_ntp is defined %}
-FallbackNTP={{ systemd_timesyncd_fallback_ntp | join(" ") }}
+{% if ntp_fallback_servers is defined %}
+FallbackNTP={{ ntp_fallback_servers | join(" ") }}
 {% else %}
 #FallbackNTP=0.arch.pool.ntp.org 1.arch.pool.ntp.org 2.arch.pool.ntp.org 3.arch.pool.ntp.org
 {% endif %}
