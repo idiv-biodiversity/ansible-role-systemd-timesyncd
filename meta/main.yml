@@ -3,7 +3,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: timesyncd
+  role_name: systemd_timesyncd
   author: Christian Krause
   description: 'install and configure systemd-timesyncd'
   company: German Centre for Integrative Biodiversity Research (iDiv)

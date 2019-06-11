@@ -80,7 +80,7 @@ Add to `requirements.yml`:
 ```yml
 ---
 
-- src: idiv-biodiversity.timesyncd
+- src: idiv-biodiversity.systemd_timesyncd
 
 ...
 ```
@@ -102,10 +102,11 @@ Write a top-level playbook:
   hosts: head
 
   roles:
-    - role: idiv-biodiversity.timesyncd
+    - role: idiv-biodiversity.systemd_timesyncd
       tags:
+        - systemd
+        - systemd-timesyncd
         - timesync
-        - timesyncd
 
 ...
 ```
@@ -119,10 +120,11 @@ Define the role dependency in `meta/main.yml`:
 
 dependencies:
 
-  - role: idiv-biodiversity.timesyncd
+  - role: idiv-biodiversity.systemd_timesyncd
     tags:
+      - systemd
+      - systemd-timesyncd
       - timesync
-      - timesyncd
 
 ...
 ```
@@ -134,8 +136,8 @@ Tags
 With these tags, only specific parts of the role can be triggered:
 
 - `timezone`: just set the time zone
-- `timesyncd`: configure `/etc/systemd/timesyncd.conf` and restart the service
-  if changed
+- `systemd-timesyncd`: configure `/etc/systemd/timesyncd.conf` and restart the
+  service if changed
 - `service`, `service-timesyncd` and `timesyncd-service`: enable and start the
   service; the purpose of the plain `service` tag is that you can enable and
   start all services across roles by using this tag, e.g. `ansible-playbook
