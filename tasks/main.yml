@@ -22,20 +22,18 @@
     owner: root
     group: root
     mode: 0644
-  register: timesyncd_config
-
-- name: restart systemd-timesyncd
-  service:
-    name: systemd-timesyncd
-    enabled: yes
-    state: restarted
-  when: timesyncd_config.changed
+  register: __systemd_timesyncd_configuration
 
 - name: enable systemd-timesyncd service and assure it is started
   service:
     name: systemd-timesyncd
     enabled: yes
-    state: started
+    state: >-
+      {{
+        __systemd_timesyncd_configuration.changed |
+          default(False) |
+          ternary("restarted", "started")
+      }}
   tags:
     - service
     - service-timesyncd
