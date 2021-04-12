@@ -10,6 +10,8 @@
   package:
     name: chrony,ntp
     state: absent
+  tags:
+    - remove-legacy-clients
 
 - name: install systemd
   package:
