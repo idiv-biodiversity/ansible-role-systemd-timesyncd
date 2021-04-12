@@ -13,6 +13,7 @@ Table of Contents
 - [Role Variables](#role-variables)
   * [Time Zone](#time-zone)
   * [NTP Servers](#ntp-servers)
+  * [Purge Legacy Packages](#purge-legacy-packages)
 - [Dependencies](#dependencies)
 - [Example Playbook](#example-playbook)
   * [Top-Level Playbook](#top-level-playbook)
@@ -20,7 +21,6 @@ Table of Contents
 - [Tags](#tags)
 - [License](#license)
 - [Author Information](#author-information)
-
 
 <!-- tocstop -->
 
@@ -63,6 +63,14 @@ ntp_fallback_servers:
   - 1.europe.pool.ntp.org
   - 2.europe.pool.ntp.org
   - 3.europe.pool.ntp.org
+```
+
+### Purge Legacy Packages
+
+Remove legacy timesync packages (ntp, chrony):
+
+```yml
+systemd_timesyncd_purge_legacy_packages: yes
 ```
 
 
@@ -128,7 +136,6 @@ dependencies:
 
 ...
 ```
-
 
 Tags
 ----

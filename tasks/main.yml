@@ -10,6 +10,7 @@
   package:
     name: chrony,ntp
     state: absent
+  when: systemd_timesyncd_purge_legacy_packages
 
 - name: install systemd
   package:
