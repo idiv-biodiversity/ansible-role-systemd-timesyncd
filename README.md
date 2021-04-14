@@ -64,6 +64,13 @@ ntp_fallback_servers:
   - 2.europe.pool.ntp.org
   - 3.europe.pool.ntp.org
 ```
+### Purge legacy time clients
+
+```yml
+purge_legacy_packages: True
+
+```
+Override this default variable to omit the task of removing any legacy time clients (ntp, chrony)
 
 
 Dependencies
@@ -128,16 +135,6 @@ dependencies:
 
 ...
 ```
-Role Variables
---------------
-
-### Base Variables
-
-```yml
-purge_legacy_packages: True
-
-```
-Override this variable to omit the task of removing any legacy time clients (ntp, chrony)
 
 Tags
 ----
