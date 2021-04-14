@@ -128,7 +128,16 @@ dependencies:
 
 ...
 ```
+Role Variables
+--------------
 
+### Base Variables
+
+```yml
+purge_legacy_packages: True
+
+```
+Override this variable to omit the task of removing any legacy time clients (ntp, chrony)
 
 Tags
 ----
@@ -142,8 +151,6 @@ With these tags, only specific parts of the role can be triggered:
   service; the purpose of the plain `service` tag is that you can enable and
   start all services across roles by using this tag, e.g. `ansible-playbook
   site.yml -t service`
-- `remove-legacy-clients`: tag associated with removal of legacy chrony,ntp client packages;
-  the purpose of this tag is to allow for package removals to be optionally excluded.
 
 The tags from the [Example Playbook](#example-playbook) are `timesyncd` and
 `timesync`. In case you switch from different time synchronization roles, the
