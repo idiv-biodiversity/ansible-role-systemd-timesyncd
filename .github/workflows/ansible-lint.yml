@@ -2,7 +2,7 @@
 
 name: ansible-lint
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   ansible-lint:
