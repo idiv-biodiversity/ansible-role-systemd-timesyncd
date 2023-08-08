@@ -10,7 +10,7 @@ Pull Requests
 
     This way, changes can be seen and discussed individually.
 
-1.  Pull requests **MUST** be **rebased** on the latest **master** from the
+1.  Pull requests **MUST** be **rebased** on the latest **main** from the
     **upstream** repository:
 
     ```bash
@@ -21,15 +21,15 @@ Pull Requests
     # fetch latest upstream commits
     git fetch upstream
 
-    # rebase your branch on master
-    git rebase upstream/master topic/name
+    # rebase your branch on main
+    git rebase upstream/main topic/name
 
     # force push the changed history
     # this will automatically update the pull request
     git push --force origin topic/name
     ```
 
-1.  Pull requests **SHOULD NOT** be done in **master**:
+1.  Pull requests **SHOULD NOT** be done in **main**:
 
     ```bash
     git switch -c topic/name
