@@ -3,6 +3,7 @@
 - name: set time zone
   community.general.timezone:
     name: '{{ system_timezone }}'
+  become: yes
   tags:
     - timezone
 
@@ -10,11 +11,13 @@
   ansible.builtin.package:
     name: chrony,ntp
     state: absent
+  become: yes
   when: systemd_timesyncd_purge_legacy_packages
 
 - name: install systemd
   ansible.builtin.package:
     name: systemd
+  become: yes
 
 - name: configure systemd-timesyncd
   ansible.builtin.template:
@@ -24,6 +27,7 @@
     group: root
     mode: 0644
   register: __systemd_timesyncd_configuration
+  become: yes
 
 - name: enable systemd-timesyncd service and assure it is started
   ansible.builtin.service:
@@ -35,6 +39,7 @@
           default(False) |
           ternary("restarted", "started")
       }}
+  become: yes
   tags:
     - service
     - service-timesyncd
