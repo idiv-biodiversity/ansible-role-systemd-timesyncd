@@ -4,20 +4,25 @@ dependencies: []
 
 galaxy_info:
   role_name: systemd_timesyncd
+  namespace: idiv_biodiversity
+
   author: Christian Krause
   description: 'install and configure systemd-timesyncd'
   company: German Centre for Integrative Biodiversity Research (iDiv)
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: '2.9'
 
   platforms:
+
     - name: ArchLinux
       versions:
-        - any
+        - all
+
     - name: Debian
       versions:
         - jessie
         - stretch
+
     - name: Ubuntu
       versions:
         - bionic

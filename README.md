@@ -27,7 +27,7 @@ Table of Contents
 Requirements
 ------------
 
-- Ansible 2+
+- Ansible 2.9
 
 
 Role Variables
@@ -77,7 +77,7 @@ systemd_timesyncd_purge_legacy_packages: yes
 Dependencies
 ------------
 
-None.
+- [community.general](https://galaxy.ansible.com/community/general)
 
 
 Example Playbook
@@ -88,7 +88,7 @@ Add to `requirements.yml`:
 ```yml
 ---
 
-- src: idiv-biodiversity.systemd_timesyncd
+- src: idiv_biodiversity.systemd_timesyncd
 
 ...
 ```
@@ -110,7 +110,7 @@ Write a top-level playbook:
   hosts: head
 
   roles:
-    - role: idiv-biodiversity.systemd_timesyncd
+    - role: idiv_biodiversity.systemd_timesyncd
       tags:
         - systemd
         - systemd-timesyncd
@@ -128,7 +128,7 @@ Define the role dependency in `meta/main.yml`:
 
 dependencies:
 
-  - role: idiv-biodiversity.systemd_timesyncd
+  - role: idiv_biodiversity.systemd_timesyncd
     tags:
       - systemd
       - systemd-timesyncd

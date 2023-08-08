@@ -1,23 +1,23 @@
 ---
 
 - name: set time zone
-  timezone:
+  community.general.timezone:
     name: '{{ system_timezone }}'
   tags:
     - timezone
 
 - name: remove unneeded ntp clients
-  package:
+  ansible.builtin.package:
     name: chrony,ntp
     state: absent
   when: systemd_timesyncd_purge_legacy_packages
 
 - name: install systemd
-  package:
+  ansible.builtin.package:
     name: systemd
 
 - name: configure systemd-timesyncd
-  template:
+  ansible.builtin.template:
     src: timesyncd.conf.j2
     dest: /etc/systemd/timesyncd.conf
     owner: root
@@ -26,7 +26,7 @@
   register: __systemd_timesyncd_configuration
 
 - name: enable systemd-timesyncd service and assure it is started
-  service:
+  ansible.builtin.service:
     name: systemd-timesyncd
     enabled: yes
     state: >-
