@@ -16,6 +16,11 @@
   ansible.builtin.package:
     name: systemd
 
+- name: install systemd-timesyncd
+  ansible.builtin.package:
+    name: systemd-timesyncd
+    state: present
+
 - name: configure systemd-timesyncd
   ansible.builtin.template:
     src: timesyncd.conf.j2
