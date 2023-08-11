@@ -16,11 +16,6 @@
   ansible.builtin.package:
     name: systemd
 
-- name: install systemd-timesyncd
-  ansible.builtin.package:
-    name: systemd-timesyncd
-    state: present
-
 - name: configure systemd-timesyncd
   ansible.builtin.template:
     src: timesyncd.conf.j2
@@ -29,6 +24,15 @@
     group: root
     mode: 0644
   register: __systemd_timesyncd_configuration
+
+- name: install systemd-timesyncd
+  ansible.builtin.package:
+    name: systemd-timesyncd
+    state: present
+  tags:
+    - service
+    - service-timesyncd
+    - timesyncd-service
 
 - name: enable systemd-timesyncd service and assure it is started
   ansible.builtin.service:
