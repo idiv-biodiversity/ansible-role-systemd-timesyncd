@@ -25,10 +25,19 @@
     mode: 0644
   register: __systemd_timesyncd_configuration
 
-- name: install systemd-timesyncd
+- name: Get service facts
+  ansible.builtin.service_facts:
+  tags:
+    - service
+    - service-timesyncd
+    - timesyncd-service
+
+- name: Install systemd-timesyncd
   ansible.builtin.package:
     name: systemd-timesyncd
     state: present
+  when: (ansible_facts.services["systemd-timesyncd.service"].status == "not-found") or
+        (ansible_facts.services["systemd-timesyncd.service"].status == "masked")
   tags:
     - service
     - service-timesyncd
