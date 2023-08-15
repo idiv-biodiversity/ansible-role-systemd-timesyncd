@@ -1,5 +1,9 @@
 ---
 
+- name: include OS-specific vars
+  ansible.builtin.include_vars: >-
+    {{ lookup("ansible.builtin.first_found", __systemd_timesyncd_vars_files) }}
+
 - name: set time zone
   community.general.timezone:
     name: '{{ system_timezone }}'
@@ -15,9 +19,9 @@
   become: yes
   when: systemd_timesyncd_purge_legacy_packages
 
-- name: install systemd
+- name: install systemd timesyncd package
   ansible.builtin.package:
-    name: systemd
+    name: '{{ __systemd_timesyncd_package }}'
   become: yes
 
 - name: configure systemd-timesyncd
