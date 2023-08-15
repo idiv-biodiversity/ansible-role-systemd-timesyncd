@@ -1,0 +1,5 @@
+---
+
+__systemd_timesyncd_package: systemd-timesyncd
+
+...
