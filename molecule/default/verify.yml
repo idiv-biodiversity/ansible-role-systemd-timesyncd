@@ -1,0 +1,79 @@
+---
+
+- name: verify
+  hosts: all
+  tasks:
+
+    - name: include main vars
+      ansible.builtin.include_vars: ../../vars/main.yml
+
+    - name: include OS-specific vars
+      ansible.builtin.include_vars: >-
+        {{ lookup("ansible.builtin.first_found", params) }}
+      vars:
+        params:
+          files: >-
+            {{
+              __systemd_timesyncd_first_found |
+                map('regex_replace', '$', '.yml') |
+                list
+            }}
+          paths: ../../vars
+
+    - name: check package installation
+      ansible.builtin.package:
+        name: '{{ __systemd_timesyncd_package }}'
+        state: present
+      check_mode: yes
+      register: __systemd_timesyncd_installed
+
+    - name: debug package installation
+      ansible.builtin.debug:
+        var: __systemd_timesyncd_installed
+
+    - name: assert on package installation
+      ansible.builtin.assert:
+        that:
+          - not __systemd_timesyncd_installed.failed
+          - not __systemd_timesyncd_installed.changed
+        success_msg: 'package is installed'
+
+    - name: check configuration file
+      ansible.builtin.stat:
+        path: /etc/systemd/timesyncd.conf
+        get_attributes: no
+        get_checksum: no
+        get_mime: no
+      check_mode: yes
+      register: __systemd_timesyncd_conf
+
+    - name: debug configuration file
+      ansible.builtin.debug:
+        var: __systemd_timesyncd_conf
+
+    - name: assert on configuration file
+      ansible.builtin.assert:
+        that:
+          - __systemd_timesyncd_conf.stat.exists
+        success_msg: 'configuration file exists'
+
+    - name: check service
+      ansible.builtin.service:
+        name: systemd-timesyncd
+        enabled: yes
+      check_mode: yes
+      register: __systemd_timesyncd_service
+
+    - name: debug service
+      ansible.builtin.debug:
+        var: __systemd_timesyncd_service
+
+    - name: assert on service
+      ansible.builtin.assert:
+        that:
+          - not __systemd_timesyncd_service.failed
+          - not __systemd_timesyncd_service.changed
+          - __systemd_timesyncd_service.enabled
+        success_msg: 'service is enabled'
+
+...

@@ -35,5 +35,7 @@ rules:
   truthy:
     allowed-values: ['yes', 'no']
     check-keys: no
+    ignore: >-
+      .github/workflows
 
 ...

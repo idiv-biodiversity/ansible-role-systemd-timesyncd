@@ -1,0 +1,36 @@
+---
+
+name: molecule
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - wip/next
+
+jobs:
+  molecule:
+    name: molecule
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - archlinux
+          - ubuntu-bionic
+          - ubuntu-focal
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - run: pip3 install ansible molecule molecule-plugins[docker] docker
+      - run: ansible --version
+      - run: molecule --version
+      - run: molecule test -p ${{ matrix.distro }}
+        env:
+          PY_COLORS: '1'
+
+...
