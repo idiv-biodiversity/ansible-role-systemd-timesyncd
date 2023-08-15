@@ -35,16 +35,26 @@
   register: __systemd_timesyncd_configuration
   become: yes
 
-- name: enable systemd-timesyncd service and assure it is started
+- name: start systemd-timesyncd service
   ansible.builtin.service:
     name: systemd-timesyncd
-    enabled: yes
     state: >-
       {{
         __systemd_timesyncd_configuration.changed |
           default(False) |
           ternary("restarted", "started")
       }}
+  when: not __systemd_timesyncd_virtualized
+  become: yes
+  tags:
+    - service
+    - service-timesyncd
+    - timesyncd-service
+
+- name: enable systemd-timesyncd service
+  ansible.builtin.service:
+    name: systemd-timesyncd
+    enabled: yes
   become: yes
   tags:
     - service
