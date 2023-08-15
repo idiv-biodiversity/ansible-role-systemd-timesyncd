@@ -37,4 +37,11 @@ __systemd_timesyncd_vars_files:
   paths:
     - vars
 
+# -----------------------------------------------------------------------------
+# other
+# -----------------------------------------------------------------------------
+
+__systemd_timesyncd_virtualized: >-
+  {{ ansible_facts.virtualization_role == "guest" }}
+
 ...

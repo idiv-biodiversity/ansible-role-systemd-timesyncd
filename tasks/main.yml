@@ -22,6 +22,7 @@
 - name: install systemd timesyncd package
   ansible.builtin.package:
     name: '{{ __systemd_timesyncd_package }}'
+    update_cache: '{{ __systemd_timesyncd_virtualized }}'
   become: yes
 
 - name: configure systemd-timesyncd
