@@ -33,7 +33,7 @@
     - timesyncd-service
 
 - name: Install systemd-timesyncd
-  ansible.builtin.service:
+  ansible.builtin.package:
     name: systemd-timesyncd
     state: present
   when: (ansible_facts.services["systemd-timesyncd.service"].status == "not-found") or
