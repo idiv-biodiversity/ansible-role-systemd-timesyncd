@@ -4,6 +4,7 @@
   community.general.timezone:
     name: '{{ system_timezone }}'
   become: yes
+  when: system_timezone is defined
   tags:
     - timezone
 
