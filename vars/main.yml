@@ -1,0 +1,40 @@
+---
+
+# -----------------------------------------------------------------------------
+# distro / os handles
+# -----------------------------------------------------------------------------
+
+__systemd_timesyncd_distro: >-
+  {{ ansible_distribution | lower }}
+
+__systemd_timesyncd_os: >-
+  {{ ansible_os_family | lower }}
+
+__systemd_timesyncd_distro_version: >-
+  {{ __systemd_timesyncd_distro }}_{{ ansible_distribution_major_version }}
+
+__systemd_timesyncd_os_version: >-
+  {{ __systemd_timesyncd_os }}_{{ ansible_distribution_major_version }}
+
+# -----------------------------------------------------------------------------
+# first found snippets
+# -----------------------------------------------------------------------------
+
+__systemd_timesyncd_first_found:
+  - '{{ __systemd_timesyncd_distro_version }}'
+  - '{{ __systemd_timesyncd_os_version }}'
+  - '{{ __systemd_timesyncd_distro }}'
+  - '{{ __systemd_timesyncd_os }}'
+  - default
+
+__systemd_timesyncd_vars_files:
+  files: >-
+    {{
+      __systemd_timesyncd_first_found |
+        map('regex_replace', '$', '.yml') |
+        list
+    }}
+  paths:
+    - vars
+
+...
