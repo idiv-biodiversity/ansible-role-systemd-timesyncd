@@ -42,6 +42,10 @@ __systemd_timesyncd_vars_files:
 # -----------------------------------------------------------------------------
 
 __systemd_timesyncd_virtualized: >-
-  {{ ansible_facts.virtualization_role == "guest" }}
+  {{
+    ansible_facts.virtualization_role == "guest"
+    and
+    ansible_facts.virtualization_type == "docker"
+  }}
 
 ...
