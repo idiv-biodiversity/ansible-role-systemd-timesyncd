@@ -25,10 +25,19 @@
     update_cache: '{{ __systemd_timesyncd_virtualized }}'
   become: yes
 
+- name: create drop-in configuration folder
+  ansible.builtin.file:
+    path: /etc/systemd/timesyncd.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+
 - name: configure systemd-timesyncd
   ansible.builtin.template:
     src: timesyncd.conf.j2
-    dest: /etc/systemd/timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf.d/ansible.conf
     owner: root
     group: root
     mode: '0644'

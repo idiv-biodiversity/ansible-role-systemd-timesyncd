@@ -143,7 +143,7 @@ Tags
 With these tags, only specific parts of the role can be triggered:
 
 - `timezone`: just set the time zone
-- `systemd-timesyncd`: configure `/etc/systemd/timesyncd.conf` and restart the
+- `systemd-timesyncd`: configure `/etc/systemd/timesyncd.conf.d/ansible.conf` and restart the
   service if changed
 - `service`, `service-timesyncd` and `timesyncd-service`: enable and start the
   service; the purpose of the plain `service` tag is that you can enable and

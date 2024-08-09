@@ -40,7 +40,7 @@
 
     - name: check configuration file
       ansible.builtin.stat:
-        path: /etc/systemd/timesyncd.conf
+        path: /etc/systemd/timesyncd.conf.d/ansible.conf
         get_attributes: no
         get_checksum: no
         get_mime: no
