@@ -77,27 +77,28 @@ systemd_timesyncd_purge_legacy_packages: yes
 Dependencies
 ------------
 
-- [community.general](https://galaxy.ansible.com/community/general)
-
-
-Example Playbook
-----------------
-
-Add to `requirements.yml`:
-
 ```yml
 ---
 
-- src: idiv_biodiversity.systemd_timesyncd
+# requirements.yml
+
+collections:
+
+  - name: community.general
+    version: X.Y.Z
+
+roles:
+
+  - name: idiv_biodiversity.systemd_timesyncd
+    src: https://github.com/idiv-biodiversity/ansible-role-systemd-timesyncd
+    version: vX.Y.Z
 
 ...
 ```
 
-Download:
 
-```console
-$ ansible-galaxy install -r requirements.yml
-```
+Example Playbook
+----------------
 
 ### Top-Level Playbook
 
