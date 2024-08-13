@@ -26,7 +26,6 @@ jobs:
       matrix:
         distro:
           - archlinux
-          - ubuntu-bionic
           - ubuntu-focal
           - ubuntu-jammy
 
