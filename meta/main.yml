@@ -23,6 +23,11 @@ galaxy_info:
         - focal
         - jammy
 
+    - name: Debian
+      versions:
+        - bookworm
+        - bullseye
+
   galaxy_tags:
     - ntp
     - systemd
