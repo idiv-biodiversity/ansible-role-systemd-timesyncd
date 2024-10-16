@@ -32,6 +32,24 @@ platforms:
     privileged: yes
     pre_build_image: yes
 
+  - name: debian-bullseye
+    image: geerlingguy/docker-debian11-ansible
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    privileged: yes
+    pre_build_image: yes
+
+  - name: debian-bookworm
+    image: geerlingguy/docker-debian12-ansible
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
+    privileged: yes
+    pre_build_image: yes
+
 provisioner:
   name: ansible
   inventory:
