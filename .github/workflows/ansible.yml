@@ -28,6 +28,8 @@ jobs:
           - archlinux
           - ubuntu-focal
           - ubuntu-jammy
+          - debian-bullseye
+          - debian-bookworm
 
     steps:
       - uses: actions/checkout@v4
